@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "projects": {
+    "jogo-da-velha": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/jogo-da-velha",
+      "sourceRoot": "apps/jogo-da-velha/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/jogo-da-velha",
+            "index": "apps/jogo-da-velha/src/index.html",
+            "main": "apps/jogo-da-velha/src/main.ts",
+            "polyfills": "apps/jogo-da-velha/src/polyfills.ts",
+            "tsConfig": "apps/jogo-da-velha/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/jogo-da-velha/src/favicon.ico",
+              "apps/jogo-da-velha/src/assets"
+            ],
+            "styles": ["apps/jogo-da-velha/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/jogo-da-velha/src/environments/environment.ts",
+                  "with": "apps/jogo-da-velha/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "jogo-da-velha:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "jogo-da-velha:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "jogo-da-velha:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/jogo-da-velha/tsconfig.app.json",
+              "apps/jogo-da-velha/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/jogo-da-velha/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/jogo-da-velha/jest.config.js",
+            "tsConfig": "apps/jogo-da-velha/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/jogo-da-velha/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "jogo-da-velha-e2e": {
+      "root": "apps/jogo-da-velha-e2e",
+      "sourceRoot": "apps/jogo-da-velha-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/jogo-da-velha-e2e/cypress.json",
+            "tsConfig": "apps/jogo-da-velha-e2e/tsconfig.e2e.json",
+            "devServerTarget": "jogo-da-velha:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "jogo-da-velha:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/jogo-da-velha-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/jogo-da-velha-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "jogo-logica": {
+      "projectType": "library",
+      "root": "libs/features/jogo-logica",
+      "sourceRoot": "libs/features/jogo-logica/src",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/features/jogo-logica/tsconfig.lib.json",
+              "libs/features/jogo-logica/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/features/jogo-logica/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/features/jogo-logica/jest.config.js",
+            "tsConfig": "libs/features/jogo-logica/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/features/jogo-logica/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "jogo-da-velha"
+}

@@ -1,0 +1,71 @@
+<div align="center" class="titulo">
+    <h1>Jogo da velha #</h1>
+
+    <div class="titulo__placar">
+        <p>jogador: {{vitorias.jogador}}</p>
+        <p>maquina: {{vitorias.maquina}}</p>
+        <p>velha: {{vitorias.velha}}</p>
+    </div>
+</div>
+
+<form [formGroup]="form" *ngIf="iniciar === false">
+
+    <div class="opcao">
+        <h3>Escolha uma opção</h3>
+
+        <button [disabled]="jogador.verEscolha() === undefined || nivel === undefined" (click)="iniciarJogo()">Iniciar
+            jogo</button>
+
+        <div>
+            <input id="bola" formControlName="escolhaJogador1" (click)="alterarCheckbox(1);escolherOpcao('BOLA')"
+                type="checkbox">
+            <label for="bola">Bola</label>
+        </div>
+        <div>
+            <input id="x" formControlName="escolhaJogador2" (click)="alterarCheckbox(2); escolherOpcao('X')"
+                type="checkbox">
+            <label for="x">X</label>
+        </div>
+
+        <h3>Escolha um nível</h3>
+
+        <div>
+            <input id="nivel1" formControlName="nivel1" (click)="alterarNivel(1)" type="checkbox">
+            <label for="nivel1">Easy</label>
+        </div>
+        <div>
+            <input id="nivel2" formControlName="nivel2" (click)="alterarNivel(2)" type="checkbox">
+            <label for="nivel2">Medium</label>
+        </div>
+        <div>
+            <input id="nivel3" formControlName="nivel3" (click)="alterarNivel(3)" type="checkbox">
+            <label for="nivel3">Hard</label>
+        </div>
+    </div>
+</form>
+
+<div class="noticia">
+
+    <div class="noticia__notificacao" *ngIf="ganhador && ganhador.ganhador && ganhador._isMaquina === false">
+        <h2>Parabéns!!!</h2>
+        <p>Você ganhou a rodada.</p>
+        <button (click)="reiniciar()">Reiniciar o jogo.</button>
+    </div>
+
+    <div class="noticia__notificacao" *ngIf="ganhador && ganhador.ganhador && ganhador._isMaquina">
+        <h2>Ah não!!</h2>
+        <p>Você perdeu a rodada.</p>
+        <button (click)="reiniciar()">Reiniciar o jogo.</button>
+    </div>
+
+    <div class="noticia__notificacao" *ngIf="ganhador && ganhador.velha">
+        <h2>Ah não!!</h2>
+        <p>Deu velha, a rodada empatou.</p>
+        <button (click)="reiniciar()">Reiniciar o jogo.</button>
+    </div>
+</div>
+
+<div class="body" *ngIf="iniciar && jogador.verEscolha() !== undefined && nivel !== undefined">
+    <div class="body__campo" *ngFor="let campo of quantidadeCampos; let i = index" (click)="emitirJogada(i + 1, false)">
+        <app-campo [nivel]="nivel" [posicaoCampo]="i + 1"></app-campo>
+    </div>

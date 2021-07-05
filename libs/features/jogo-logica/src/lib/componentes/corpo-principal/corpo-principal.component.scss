@@ -1,0 +1,103 @@
+.body {
+    position: relative;
+    top: -56px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: auto;
+    margin-top: 100px;
+    width: 381px;
+    height: 379px;
+    border: 1px solid black;
+    box-shadow: 0px 0px 27px -10px red;
+
+    &__campo {
+        cursor: pointer;
+        width: 125px;
+        height: 125px;
+        border: 1px black solid;
+    }
+}
+
+.titulo {
+    text-shadow: 1px 1px 1px red;
+    &__placar {
+        grid-template-columns: auto auto auto;
+        display: grid;
+        width: 407px;
+    }
+}
+
+.noticia {
+    &__notificacao {
+        position: absolute;
+        top: 28px;
+        width: 302px;
+        height: 142px;
+        border: 1px solid;
+        padding: 12px;
+        text-align: center;
+
+        h2 {
+            font-size: 31px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        button {
+            width: 78%;
+            padding: 5px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+    }
+}
+
+.opcao {
+    position: relative;
+    top: 50px;
+    border: 1px solid;
+    padding: 15px;
+    width: 228px;
+
+    button {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        margin-bottom: 25px;
+        font-size: 18px;
+    }
+}
+
+h1 {
+    font-family: cursive;
+    font-size: 54px;
+    margin-bottom: auto;
+}
+
+h2 {
+    font-family: cursive;
+    font-size: 43px;
+}
+
+h3 {
+    font-family: cursive;
+    font-size: 25px;
+}
+
+p {
+    font-family: cursive;
+}
+
+input[type="checkbox"] {
+    height: 16px;
+    width: 16px;
+}
+
+label {
+    font-size: 20px;
+    font-family: cursive;
+}
